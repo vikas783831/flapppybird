@@ -12,12 +12,18 @@ let isGameStarted = false;
 let score = 0;
 let gameLoop;
 let pipeCreationLoop;
+let lastJumpTime = 0; // Track the last time the bird jumped
 
 function jump() {
     if (!isGameStarted || isGameOver) return;
+
+    const currentTime = Date.now();
+    if (currentTime - lastJumpTime < 200) return; // Prevent multiple jumps within 200ms
+
     velocity = -8; // Apply upward force
     bird.style.transform = 'rotate(-30deg)';
     setTimeout(() => bird.style.transform = 'rotate(0deg)', 200);
+    lastJumpTime = currentTime; // Update the last jump time
 }
 
 function updateGame() {
@@ -139,10 +145,12 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
+// Handle mouse clicks (for desktop)
 document.addEventListener('mousedown', () => {
     jump();
 });
 
+// Handle touch events (for mobile)
 document.addEventListener('touchstart', (e) => {
     e.preventDefault(); // Prevent default touch behavior
     jump();
