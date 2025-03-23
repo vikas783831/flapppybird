@@ -49,9 +49,11 @@ function updateGame() {
 
         // Score update
         if (pipeRect.right < birdRect.left && !pipe.passed) {
-            score++;
-            scoreElement.textContent = score;
-            pipe.passed = true;
+            pipe.passed = true; // Mark the pipe as passed
+            if (pipe.classList.contains('upper-pipe')) {
+                score++; // Increment score only once per pair of pipes
+                scoreElement.textContent = score;
+            }
         }
     });
 }
@@ -66,7 +68,7 @@ function createPipe() {
    
     // Upper pipe
     const upperPipe = document.createElement('div');
-    upperPipe.className = 'pipe';
+    upperPipe.className = 'pipe upper-pipe'; // Add a class to identify upper pipe
     upperPipe.style.height = `${pipeHeight}px`;
     upperPipe.style.top = '0';
     upperPipe.style.left = '100%';
@@ -74,7 +76,7 @@ function createPipe() {
 
     // Lower pipe
     const lowerPipe = document.createElement('div');
-    lowerPipe.className = 'pipe';
+    lowerPipe.className = 'pipe lower-pipe'; // Add a class to identify lower pipe
     lowerPipe.style.height = `${gameContainer.clientHeight - pipeHeight - gap}px`;
     lowerPipe.style.bottom = '0';
     lowerPipe.style.left = '100%';
