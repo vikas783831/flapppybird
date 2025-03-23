@@ -147,22 +147,24 @@ document.addEventListener('keydown', (e) => {
 
 // Handle mouse clicks (for desktop)
 document.addEventListener('mousedown', () => {
-    jump();
+    if (isGameStarted) jump(); // Only jump if the game has started
 });
 
 // Handle touch events (for mobile)
 let isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
 if (isTouchDevice) {
-    // Remove mousedown listener for touch devices
-    document.removeEventListener('mousedown', jump);
-
     // Add touchstart listener for touch devices
     document.addEventListener('touchstart', (e) => {
-        e.preventDefault(); // Prevent default touch behavior
-        jump();
+        if (isGameStarted) {
+            e.preventDefault(); // Prevent default touch behavior
+            jump();
+        }
     }, { passive: false }); // Ensure preventDefault works
 }
 
+// Start button click event
 startBtn.addEventListener('click', startGame);
+
+// Restart button click event
 restartBtn.addEventListener('click', startGame);
