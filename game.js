@@ -4,9 +4,9 @@ const scoreElement = document.getElementById('score');
 const startBtn = document.getElementById('start-btn');
 const restartBtn = document.getElementById('restart-btn');
 
-let birdY = 300;
-let velocity = 0;
-let gravity = 0.5;
+let birdY = 300; // Initial bird position
+let velocity = 0; // Bird's vertical velocity
+let gravity = 0.5; // Gravity effect
 let isGameOver = false;
 let isGameStarted = false;
 let score = 0;
@@ -15,7 +15,7 @@ let pipeCreationLoop;
 
 function jump() {
     if (!isGameStarted || isGameOver) return;
-    velocity = -8;
+    velocity = -8; // Apply upward force
     bird.style.transform = 'rotate(-30deg)';
     setTimeout(() => bird.style.transform = 'rotate(0deg)', 200);
 }
@@ -23,11 +23,11 @@ function jump() {
 function updateGame() {
     if (!isGameStarted || isGameOver) return;
 
-    velocity += gravity;
-    birdY += velocity;
+    velocity += gravity; // Apply gravity
+    birdY += velocity; // Update bird's position
     bird.style.top = `${birdY}px`;
 
-    // Boundary check
+    // Boundary check (top and bottom of the game container)
     if (birdY < 0 || birdY > gameContainer.clientHeight - bird.clientHeight) {
         gameOver();
     }
@@ -59,7 +59,7 @@ function updateGame() {
 function createPipe() {
     if (!isGameStarted || isGameOver) return;
 
-    const gap = 150;
+    const gap = 150; // Gap between upper and lower pipes
     const minHeight = 50;
     const maxHeight = gameContainer.clientHeight - gap - minHeight;
     const pipeHeight = Math.random() * (maxHeight - minHeight) + minHeight;
@@ -88,11 +88,11 @@ function createPipe() {
             clearInterval(pipeMove);
             return;
         }
-        pipeX -= 2;
+        pipeX -= 2; // Move pipes to the left
         upperPipe.style.left = `${pipeX}%`;
         lowerPipe.style.left = `${pipeX}%`;
 
-        if (pipeX < -15) {
+        if (pipeX < -15) { // Remove pipes when they go off-screen
             upperPipe.remove();
             lowerPipe.remove();
             clearInterval(pipeMove);
@@ -137,8 +137,12 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
+document.addEventListener('mousedown', () => {
+    jump();
+});
+
 document.addEventListener('touchstart', (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent default touch behavior
     jump();
 });
 
