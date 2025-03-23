@@ -151,10 +151,18 @@ document.addEventListener('mousedown', () => {
 });
 
 // Handle touch events (for mobile)
-document.addEventListener('touchstart', (e) => {
-    e.preventDefault(); // Prevent default touch behavior
-    jump();
-});
+let isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+if (isTouchDevice) {
+    // Remove mousedown listener for touch devices
+    document.removeEventListener('mousedown', jump);
+
+    // Add touchstart listener for touch devices
+    document.addEventListener('touchstart', (e) => {
+        e.preventDefault(); // Prevent default touch behavior
+        jump();
+    });
+}
 
 startBtn.addEventListener('click', startGame);
 restartBtn.addEventListener('click', startGame);
