@@ -6,7 +6,7 @@ const restartBtn = document.getElementById('restart-btn');
 
 let birdY = 300; // Initial bird position
 let velocity = 0; // Bird's vertical velocity
-let gravity = 0.5; // Gravity effect
+let gravity = 0.5 * 1.17; // Increased gravity by 17%
 let isGameOver = false;
 let isGameStarted = false;
 let score = 0;
@@ -20,7 +20,7 @@ function jump() {
     const currentTime = Date.now();
     if (currentTime - lastJumpTime < 200) return; // Prevent multiple jumps within 200ms
 
-    velocity = -8; // Apply upward force
+    velocity = -8 * 1.17; // Increased upward force by 17%
     bird.style.transform = 'rotate(-30deg)';
     setTimeout(() => bird.style.transform = 'rotate(0deg)', 200);
     lastJumpTime = currentTime; // Update the last jump time
@@ -67,7 +67,7 @@ function updateGame() {
 function createPipe() {
     if (!isGameStarted || isGameOver) return;
 
-    const gap = 150; // Gap between upper and lower pipes
+    const gap = 150 * 1.20; // Increased gap between pipes by 20%
     const minHeight = 50;
     const maxHeight = gameContainer.clientHeight - gap - minHeight;
     const pipeHeight = Math.random() * (maxHeight - minHeight) + minHeight;
