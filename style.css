@@ -22,18 +22,20 @@ body {
 
 #bird {
     position: absolute;
-    width: 8%; /* Responsive width */
-    height: 8%; /* Responsive height */
-    left: 10%; /* Responsive position */
+    width: 40px; /* Fixed size or use percentages for responsiveness */
+    height: 40px;
+    left: 50px; /* Initial horizontal position */
+    top: 300px; /* Initial vertical position */
     background-image: url('https://iili.io/2mONmdl.md.png');
     background-size: contain;
+    background-repeat: no-repeat; /* Ensure the image doesn't repeat */
     transition: transform 0.1s;
     z-index: 2;
 }
 
 .pipe {
     position: absolute;
-    width: 15%; /* Responsive width */
+    width: 60px; /* Fixed size or use percentages for responsiveness */
     background-image: url('https://i.postimg.cc/pdBBVgZs/Pipe.png');
     background-size: cover;
     background-position: center;
@@ -45,7 +47,7 @@ body {
     top: 10px;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 5vw; /* Responsive font size */
+    font-size: 32px; /* Fixed size or use vw for responsiveness */
     font-family: Arial;
     color: white;
     font-weight: bold;
@@ -56,7 +58,7 @@ body {
 .game-btn {
     position: absolute;
     padding: 12px 24px;
-    font-size: 4vw; /* Responsive font size */
+    font-size: 18px; /* Fixed size or use vw for responsiveness */
     background: #2ecc71;
     color: white;
     border: none;
