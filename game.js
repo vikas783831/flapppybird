@@ -28,7 +28,7 @@ function updateGame() {
     bird.style.top = `${birdY}px`;
 
     // Boundary check
-    if (birdY < 0 || birdY > gameContainer.clientHeight - 40) {
+    if (birdY < 0 || birdY > gameContainer.clientHeight - bird.clientHeight) {
         gameOver();
     }
 
@@ -69,7 +69,7 @@ function createPipe() {
     upperPipe.className = 'pipe';
     upperPipe.style.height = `${pipeHeight}px`;
     upperPipe.style.top = '0';
-    upperPipe.style.left = '400px';
+    upperPipe.style.left = '100%';
     upperPipe.style.transform = 'rotate(180deg)';
 
     // Lower pipe
@@ -77,22 +77,22 @@ function createPipe() {
     lowerPipe.className = 'pipe';
     lowerPipe.style.height = `${gameContainer.clientHeight - pipeHeight - gap}px`;
     lowerPipe.style.bottom = '0';
-    lowerPipe.style.left = '400px';
+    lowerPipe.style.left = '100%';
 
     gameContainer.append(upperPipe, lowerPipe);
 
     // Pipe animation
-    let pipeX = 400;
+    let pipeX = 100;
     const pipeMove = setInterval(() => {
         if (isGameOver) {
             clearInterval(pipeMove);
             return;
         }
         pipeX -= 2;
-        upperPipe.style.left = `${pipeX}px`;
-        lowerPipe.style.left = `${pipeX}px`;
+        upperPipe.style.left = `${pipeX}%`;
+        lowerPipe.style.left = `${pipeX}%`;
 
-        if (pipeX < -60) {
+        if (pipeX < -15) {
             upperPipe.remove();
             lowerPipe.remove();
             clearInterval(pipeMove);
@@ -144,80 +144,3 @@ document.addEventListener('touchstart', (e) => {
 
 startBtn.addEventListener('click', startGame);
 restartBtn.addEventListener('click', startGame);
-
-On Sun, 23 Mar 2025 at 13:10, Aditya Pandat <pandataditya616@gmail.com> wrote:
-body {
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: #2c3e50;
-    touch-action: manipulation;
-}
-
-#game-container {
-    position: relative;
-    width: 400px;
-    height: 600px;
-    overflow: hidden;
-    background: url('https://iili.io/2mORBt9.md.jpg');
-    background-size: cover;
-}
-
-#bird {
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    left: 50px;
-    background-image: url('https://iili.io/2mONmdl.md.png');
-    background-size: contain;
-    transition: transform 0.1s;
-    z-index: 2;
-}
-
-.pipe {
-    position: absolute;
-    width: 60px;
-    background-image: url('https://i.postimg.cc/pdBBVgZs/Pipe.png');
-    background-size: cover;
-    background-position: center;
-    z-index: 1;
-}
-
-#score {
-    position: absolute;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 32px;
-    font-family: Arial;
-    color: white;
-    font-weight: bold;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-    z-index: 100;
-}
-
-.game-btn {
-    position: absolute;
-    padding: 12px 24px;
-    font-size: 18px;
-    background: #2ecc71;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    z-index: 200;
-    transform: translateX(-50%);
-}
-
-#start-btn {
-    left: 50%;
-    top: 50%;
-}
-
-#restart-btn {
-    left: 50%;
-    top: 60%;
-    display: none;
-}
