@@ -10,18 +10,21 @@ body {
 
 #game-container {
     position: relative;
-    width: 400px;
-    height: 600px;
+    width: 90%; /* Responsive width */
+    max-width: 400px; /* Maximum width for larger screens */
+    height: 90vh; /* Responsive height */
+    max-height: 600px; /* Maximum height for larger screens */
     overflow: hidden;
     background: url('https://iili.io/2mORBt9.md.jpg');
     background-size: cover;
+    margin: 0 auto; /* Center the container */
 }
 
 #bird {
     position: absolute;
-    width: 40px;
-    height: 40px;
-    left: 50px;
+    width: 8%; /* Responsive width */
+    height: 8%; /* Responsive height */
+    left: 10%; /* Responsive position */
     background-image: url('https://iili.io/2mONmdl.md.png');
     background-size: contain;
     transition: transform 0.1s;
@@ -30,7 +33,7 @@ body {
 
 .pipe {
     position: absolute;
-    width: 60px;
+    width: 15%; /* Responsive width */
     background-image: url('https://i.postimg.cc/pdBBVgZs/Pipe.png');
     background-size: cover;
     background-position: center;
@@ -42,7 +45,7 @@ body {
     top: 10px;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 32px;
+    font-size: 5vw; /* Responsive font size */
     font-family: Arial;
     color: white;
     font-weight: bold;
@@ -53,23 +56,22 @@ body {
 .game-btn {
     position: absolute;
     padding: 12px 24px;
-    font-size: 18px;
+    font-size: 4vw; /* Responsive font size */
     background: #2ecc71;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     z-index: 200;
+    left: 50%;
     transform: translateX(-50%);
 }
 
 #start-btn {
-    left: 50%;
     top: 50%;
 }
 
 #restart-btn {
-    left: 50%;
     top: 60%;
     display: none;
 }
