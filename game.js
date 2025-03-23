@@ -161,7 +161,7 @@ if (isTouchDevice) {
     document.addEventListener('touchstart', (e) => {
         e.preventDefault(); // Prevent default touch behavior
         jump();
-    });
+    }, { passive: false }); // Ensure preventDefault works
 }
 
 startBtn.addEventListener('click', startGame);
